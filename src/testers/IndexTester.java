@@ -1,24 +1,21 @@
+package testers;
+import git.*;
 import static org.junit.Assert.assertTrue;
-import java.util.*;
-import java.io.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//6 tests - 2 for blob, 3 for index 
-//check file content 
-//check file location
-//check index and objects
-//adds blob to index file 
-//removes blob from index file
-//multiple adds and at least 1 remove
-class JUnitBlobTest {
+
+class IndexTester {
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		//create test folder, objects folder in test, three txt files
@@ -62,16 +59,9 @@ class JUnitBlobTest {
 		File test = new File("./test");
 		test.delete();
 	}
-
-	@Test
-	void blobFileContent() {
-		Blob b = new Blob("txt.txt");
-		File f = new File("./test/objects/94e66df8cd09d410c62d9e0dc59d3a884e458e05");
-		assertTrue(f.exists());//checks if file named the sha1 of some content exists in objects
-	}
 	
 	@Test
-	void checkIndexAndObjects() throws IOException {
+	void verifyIndexFileContents() throws IOException {
 		
 		
 		//initiate, add to index
@@ -112,49 +102,6 @@ class JUnitBlobTest {
 		//Check removal from index.txt
 		assertFalse(s.hasNext());//if removed all, would be empty
 		
-	}
-	
-//	@Test
-//	void treeTest() throws IOException {
-//		//create arraylist, add elements (blobs and trees)
-//		ArrayList<String> list = new ArrayList<String>();
-//		list.add("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f");
-//		list.add("blob : 01d82591292494afd1602d175e165f94992f6f5f");
-//		list.add("blob : f1d82236ab908c86ed095023b1d2e6ddf78a6d83");
-//		list.add("tree : bd1ccec139dead5ee0d8c3a0499b42a7d43ac44b");
-//		list.add("tree : e7d79898d3342fd15daf6ec36f4cb095b52fd976");
-//		
-//		//Initialize tree with list, check if file with correct sha1 exists in objects
-//		Tree tree = new Tree(list);
-//		File file = new File("test/objects/dd4840f48a74c1f97437b515101c66834b59b1be");
-//		assertTrue(file.exists());
-//		
-//		//Check if all lines exist and are correct 
-//		Scanner scanner = new Scanner(file);
-//		assertTrue(scanner.nextLine().equals("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f"));
-//		assertTrue(scanner.nextLine().equals("blob : 01d82591292494afd1602d175e165f94992f6f5f"));
-//		assertTrue(scanner.nextLine().equals("blob : f1d82236ab908c86ed095023b1d2e6ddf78a6d83"));
-//		assertTrue(scanner.nextLine().equals("tree : bd1ccec139dead5ee0d8c3a0499b42a7d43ac44b"));
-//		assertTrue(scanner.nextLine().equals("tree : e7d79898d3342fd15daf6ec36f4cb095b52fd976"));
-//		file.delete();
-//	}
-	
-	@Test
-	void treeTest() throws IOException {
-		ArrayList<String> arr = new ArrayList<String>();
-		arr.add("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f");
-		arr.add("blob : 01d82591292494afd1602d175e165f94992f6f5f");
-		arr.add("blob : f1d82236ab908c86ed095023b1d2e6ddf78a6d83");
-		arr.add("tree : bd1ccec139dead5ee0d8c3a0499b42a7d43ac44b");
-		arr.add("tree : e7d79898d3342fd15daf6ec36f4cb095b52fd976");
-		Tree tree = new Tree(arr);
-		File file = new File("./test/objects/dd4840f48a74c1f97437b515101c66834b59b1be");
-		Scanner sc = new Scanner(file);
-		for(int i = 0; i<arr.size(); i++) {
-			assertTrue(arr.get(i).equals(sc.nextLine()));
-		}
-		Files.deleteIfExists(Paths.get("./test/objects/dd4840f48a74c1f97437b515101c66834b59b1be"));
-		assertFalse(file.exists());
 	}
 
 }
