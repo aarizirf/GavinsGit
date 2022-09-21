@@ -61,7 +61,7 @@ class TreeTester {
 		test.delete();
 	}
 	
-	
+//	TODO: update this test to make sure filenames are correct
 	@Test
 	void testTree() throws IOException {
 		ArrayList<String> arr = new ArrayList<String>();
@@ -73,6 +73,7 @@ class TreeTester {
 		Tree tree = new Tree(arr);
 		File file = new File("./test/objects/dd4840f48a74c1f97437b515101c66834b59b1be");
 		Scanner sc = new Scanner(file);
+		
 		for(int i = 0; i<arr.size(); i++) {
 			assertTrue(arr.get(i).equals(sc.nextLine()));
 		}

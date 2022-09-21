@@ -42,6 +42,7 @@ public class Tree {
 		HashMap<String, String> indexMap = getMapFromFile(index);
 		text = "";
 		
+//		
 		for (String s : fullArray) {//create string with all lines in array
 			String withFilename = s + " ";
 			
@@ -51,15 +52,10 @@ public class Tree {
 			
 			
 			for (java.util.Map.Entry<String, String> entry : indexMap.entrySet()) {
-				System.out.println(entry.getValue());
-//	            if (entry.getValue().equals(sha)) {
+	            if (entry.getValue().equals(sha)) {
 //	                withFilename += entry.getKey();
-//
-//	            }
-	            withFilename += "filenameexample";
+	            }
 	        }
-			
-			System.out.println(withFilename);
 			
 			
 			text+=withFilename + "\n";
